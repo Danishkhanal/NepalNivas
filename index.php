@@ -10,207 +10,352 @@
     <!-- Custom CSS -->
     <style>
         body {
-            background-color: #ffffff; /* Set the entire body background to white */
-            font-family: 'Arial', sans-serif;
-            color: #333;
-        }
+    background-color: #f8f9fa; /* Light gray background */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
 
-        .container {
-            font-family: 'Arial', sans-serif;
-        }
+.container {
+    font-family: 'Arial', sans-serif;
+}
 
-        header {
-            margin-bottom: 30px;
-        }
+header {
+    margin-bottom: 30px;
+}
 
-        h1 {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #2c3e50;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e74c3c; /* Vibrant red for headings */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-        .room-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+.room-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .room-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
+.room-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-        }
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
 
-        .card-title {
-            font-weight: bold;
-            color: #2c3e50;
-        }
+.card-title {
+    font-weight: bold;
+    color: #3498db; /* Vibrant blue for card titles */
+}
 
-        .btn-primary,
-        .btn-danger,
-        .btn-secondary {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
+.btn-primary,
+.btn-danger,
+.btn-secondary {
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+}
 
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-        }
+.btn-primary {
+    background-color: #2980b9; /* Bright blue for primary button */
+    border: none;
+}
 
-        .btn-danger {
-            background-color: #e74c3c;
-            border: none;
-        }
+.btn-danger {
+    background-color: #e74c3c; /* Vibrant red for danger button */
+    border: none;
+}
 
-        .btn-secondary {
-            background-color: #95a5a6;
-            border: none;
-        }
+.btn-secondary {
+    background-color: #16a085; /* Bright teal for secondary button */
+    border: none;
+}
 
-        .btn:hover {
-            opacity: 0.8;
-        }
+.btn:hover {
+    opacity: 0.85;
+}
 
-        .room-checkbox {
-            margin-top: 10px;
-        }
+.room-checkbox {
+    margin-top: 10px;
+}
 
-        .comparison-table {
-            margin-top: 30px;
-            border-collapse: collapse;
-            width: 100%;
-        }
+.comparison-table {
+    margin-top: 30px;
+    border-collapse: collapse;
+    width: 100%;
+}
 
-        .comparison-table th,
-        .comparison-table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
+.comparison-table th,
+.comparison-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
 
-        .comparison-table th {
-            background-color: #34495e;
-            color: white;
-        }
+.comparison-table th {
+    background-color: #2c3e50; /* Darker blue for table header */
+    color: white;
+}
 
-        .comparison-table td {
-            background-color: #ecf0f1;
-        }
+.comparison-table td {
+    background-color: #ecf0f1; /* Light gray for table cells */
+}
 
-        .comparison-results {
-            margin-top: 30px;
-        }
+.comparison-results {
+    margin-top: 30px;
+}
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #f39c12; /* Golden color for navbar brand */
+}
 
-        .navbar-nav {
-            flex-direction: row;
-        }
+.navbar-nav {
+    flex-direction: row;
+}
 
-        .navbar-nav .nav-item {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
+.navbar-nav .nav-item {
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
-        .navbar-nav .nav-link {
-            font-size: 1rem;
-        }
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    color: #34495e; /* Slightly lighter color for nav links */
+}
 
-        /* Form Container with Background Image */
-        .form-container {
-            text-align: center;
-            max-width: 600px; /* Limited width */
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 20px;
-            height: 400px; /* Set height to make it longer */
-            background-color: rgba(255, 255, 255, 0.8); /* Light background with transparency for content */
-            border-radius: 10px; /* Slight border-radius for smooth edges */
-            position: relative; /* Ensures other content is properly layered */
-            z-index: 1;
-        }
+.form-container {
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly more transparent white */
+    border-radius: 10px;
+    position: relative;
+}
 
-        .form-heading {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
+.form-heading {
+    font-size: 1.8rem; /* Slightly larger font size */
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
 
-        .form-group label {
-            font-weight: bold;
-        }
+.form-group label {
+    font-weight: bold;
+    color: #2980b9; /* Vibrant blue for form labels */
+}
 
-        .form-group select,
-        .form-group input {
-            padding: 8px;
-            font-size: 0.9rem;
-            width: 100%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-        }
+.form-group select,
+.form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+}
 
-        .btn-submit {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-            width: 100%;
-            padding: 12px;
-        }
+.btn-submit {
+    background-color: #2980b9;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+}
 
-        .btn-submit:hover {
-            background-color: #0056b3;
-        }
+.btn-submit:hover {
+    background-color: #3498db; /* Lighter blue on hover */
+}
 
-        /* Section for Background Image */
-        .background-image-section {
-            background-image: url('images/background.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 400px; /* Height for the background image section */
-            position: relative;
-            margin-bottom: 30px;
-        }
+.background-image-section {
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 450px; /* Increased height for more impact */
+    position: relative;
+    margin-bottom: 30px;
+}
 
-        .room-availability-section {
-            background-color: rgba(255, 255, 255, 0.9); /* White background */
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 30px;
-        }
+.room-availability-section {
+    background-color: rgba(255, 255, 255, 0.9); /* White background with opacity */
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 30px;
+}
 
-        .navbar-nav {
-            flex-direction: row;
-        }
+.image-upload-section {
+    margin-top: 20px;
+    text-align: center;
+    padding: 30px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
 
-        .image-upload-section {
-            margin-top: 20px;
-            text-align: center;
-            padding: 30px;
-            background-color: #f0f0f0; /* Light gray background */
-            border-radius: 10px;
-        }
+.upload-btn {
+    background-color: #16a085; /* Bright teal */
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+}
 
-        .upload-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-        }
+.upload-btn:hover {
+    background-color: #1abc9c; /* Slightly lighter teal on hover */
+}
 
-        .upload-btn:hover {
-            background-color: #0056b3;
-        }
+#testimonialCarousel {
+    /* Removed extra padding */
+}
+
+#testimonialCarousel .carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+#testimonialCarousel .card {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border: none;
+    margin: 0 auto;
+    max-width: 650px; /* Increased card width */
+}
+
+.testimonial-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: #e74c3c; /* Vibrant red for indicators */
+    border: 0;
+}
+
+.carousel-indicators .active {
+    opacity: 1;
+}
+
+.know-more-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.know-more-container .btn {
+    padding: 1rem 2rem;
+    background-color: #ffffff; /* White background for 'Know More' button */
+    color: #212529; /* Text color set to #212529 */
+    font-weight: bold;
+    border: 1px solid #212529; /* Optional: adds border for contrast */
+}
+
+.know-more-container .btn:hover {
+    background-color:rgb(54, 57, 60); /* Light gray background on hover */
+    color:rgb(237, 237, 237); /* Keep text color dark on hover */
+}
+
+.text-warning {
+    margin-bottom: 1rem;
+    color: #212529; /* Text color set to #212529 */
+    background-color: #ffffff; /* White background for warning text */
+}
+/* Styling for Reach Us Section */
+.container {
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50; /* Dark color for headings */
+}
+
+.map-placeholder {
+    margin-bottom: 20px;
+}
+
+.phone-contact {
+    margin-bottom: 20px;
+}
+
+.phone-contact .btn {
+    padding: 12px 24px;
+    font-weight: bold;
+    background-color: #2980b9; /* Bright blue */
+    border: none;
+    color: white;
+}
+
+.phone-contact .btn:hover {
+    background-color: #3498db; /* Slightly lighter blue on hover */
+}
+
+.social-media .btn {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.social-media .btn:hover {
+    opacity: 0.85;
+}
+
+.social-media .btn-primary {
+    background-color: #3b5998; /* Facebook Blue */
+}
+
+.social-media .btn-info {
+    background-color: #00acee; /* Twitter Blue */
+}
+
+.social-media .btn-danger {
+    background-color: #c13584; /* Instagram Red */
+}
+/* Styling for Footer */
+.footer {
+  background-color: #333;
+  color: white;
+}
+
+.footer h3, .footer h5 {
+  font-weight: bold;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer .col-md-4 {
+  flex: 1;
+}
+
+.footer .m-2 {
+  margin: 0 10px;
+}
+
+
     </style>
 </head>
 
@@ -372,6 +517,158 @@
         </div>
     </div>
 
+    <!-- More Facilities Button -->
+<div class="container text-center mb-5">
+    <button class="btn btn-outline-dark">More Facilities >>></button>
+</div>
+
+<div class="container mb-5">
+    <h2 class="text-center mb-4">Guests</h2>
+
+    <div class="testimonial-container">
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">  <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="Testimonials\Rambo.jpg" class="rounded-circle me-3" alt="Profile">
+                                <h5 class="card-title mb-0">Rambo</h5>
+                            </div>
+                            <p class="card-text">asdlkfj Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero
+sed tempore illo atque beatae asperiores, adipisci dicta quia nisi voluptates impedit
+perspiciatis, nobis libero culpa error officiis totam</p>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item"> <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="Testimonials\Sita.jpg" class="rounded-circle me-3" alt="Profile">
+                                <h5 class="card-title mb-0">Sita</h5>
+                            </div>
+                            <p class="card-text">asdlkfj Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero
+sed tempore illo atque beatae asperiores, adipisci dicta quia nisi voluptates impedit
+perspiciatis, nobis libero culpa error officiis totam</p>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item"> <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="Testimonials\bill.jpg" class="rounded-circle me-3" alt="Profile">
+                                <h5 class="card-title mb-0">Bill</h5>
+                            </div>
+                            <p class="card-text">asdlkfj Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero
+sed tempore illo atque beatae asperiores, adipisci dicta quia nisi voluptates impedit
+perspiciatis, nobis libero culpa error officiis totam</p>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 2"></button>
+            </div>
+        </div>
+
+        <div class="know-more-container">
+            <button class="btn btn-outline-dark btn-lg">Know More >>></button>
+        </div>
+    </div>
+</div>
+
+<script>
+    var testimonialCarousel = new bootstrap.Carousel(document.getElementById('testimonialCarousel'), {
+        interval: 30
+    });
+</script>
+
+<!-- Reach Us Section -->
+<div class="container text-center mt-5">
+    <h2 class="mb-4">Reach us with</h2>
+
+    <!-- Map Placeholder -->
+    <div class="map-placeholder mb-4">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.270639087445!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19178b97e8cf%3A0x9ebc47bdfb99b97d!2sKathmandu!5e0!3m2!1sen!2snp!4v1606444823271!5m2!1sen!2snp" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- Phone Contact -->
+    <div class="phone-contact mb-4">
+        <p><strong>Contact Us By Phone:</strong></p>
+        <p><a href="tel:+97701565656" class="btn btn-secondary">Call Us: -9779822222222</a></p>
+    </div>
+
+    <!-- Social Media Links -->
+    <div class="social-media mb-4">
+        <p><strong>Connect with us on Social Media:</strong></p>
+        <a href="https://facebook.com" target="_blank" class="btn btn-primary m-2">Facebook</a>
+        <a href="https://twitter.com" target="_blank" class="btn btn-info m-2">Twitter</a>
+        <a href="https://instagram.com" target="_blank" class="btn btn-danger m-2">Instagram</a>
+    </div>
+</div>
+<!-- Footer Section -->
+<footer class="footer mt-5 py-4 bg-dark text-white">
+  <div class="container">
+    <div class="row">
+      <!-- Left Section: Website Name/Logo and Brief Description -->
+      <div class="col-md-4 mb-4">
+        <h3 class="text-white">NepalNvas</h3>
+        <p class="text-white">NepalNvas is your gateway to the best accommodations and travel experiences in Nepal. Discover a unique blend of comfort and culture, tailored just for you.</p>
+      </div>
+
+      <!-- Center Section: Links (Site Map/Navigation) -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#" class="text-white">Home</a></li>
+          <li><a href="#" class="text-white">Rooms</a></li>
+          <li><a href="#" class="text-white">Facilities</a></li>
+          <li><a href="#" class="text-white">Contact Us</a></li>
+          <li><a href="#" class="text-white">About</a></li>
+        </ul>
+      </div>
+
+      <!-- Right Section: Social Media Links -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-white">Follow Us</h5>
+        <div>
+          <a href="https://facebook.com" target="_blank" class="text-white m-2">
+            <i class="fab fa-facebook-f"></i> Facebook
+          </a>
+          <a href="https://twitter.com" target="_blank" class="text-white m-2">
+            <i class="fab fa-twitter"></i> Twitter
+          </a>
+          <a href="https://instagram.com" target="_blank" class="text-white m-2">
+            <i class="fab fa-instagram"></i> Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom Section: Copyright Information -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="mb-0">&copy; 2025 NepalNvas. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
     <!-- Modal for Room Details -->
     <div class="modal fade" id="roomDetailsModal" tabindex="-1" aria-labelledby="roomDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -390,6 +687,7 @@
     <!-- Bootstrap JS and Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <script>
         // Function to compare rooms
         function compareRooms() {
@@ -447,25 +745,39 @@
 
         // Function to view details of a room
         function viewDetails(roomId) {
-            fetch('get_room_details.php?id=' + roomId)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert(data.error);  // Show error if room is not found
-                        return;
-                    }
+    fetch('get_room_details.php?id=' + roomId)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);  // Show error if room is not found
+                return;
+            }
 
-                    document.getElementById('roomDetailsModalLabel').textContent = data.room_name;
-                    document.getElementById('roomDetailsModalBody').innerHTML = `
-                        <img src="${data.image}" class="img-fluid mb-3" alt="Room Image">
-                        <p><strong>Description:</strong> ${data.description}</p>
-                        <p><strong>Price: $${data.price}</strong></p>
-                        <p><strong>Capacity:</strong> ${data.capacity} people</p>
-                    `;
-                    var myModal = new bootstrap.Modal(document.getElementById('roomDetailsModal'));
-                    myModal.show();
-                });
-        }
+            // Display room details
+            document.getElementById('roomDetailsModalLabel').textContent = data.room_name;
+            document.getElementById('roomDetailsModalBody').innerHTML = `
+                <img src="${data.image}" class="img-fluid mb-3" alt="Room Image">
+                <p><strong>Description:</strong> ${data.description}</p>
+                <p><strong>Price:</strong> $${data.price}</p>
+                
+                <p><strong>Amenities:</strong></p>
+                <ul>
+                    ${data.wifi == 1 ? "<li>Wi-Fi</li>" : ""}
+                    ${data.tv == 1 ? "<li>TV</li>" : ""}
+                    ${data.ac == 1 ? "<li>AC</li>" : ""}
+                    ${data.minibar == 1 ? "<li>Minibar</li>" : ""}
+                    ${data.bathroom == 1 ? "<li>Bathroom</li>" : ""}
+                    ${data.balcony == 1 ? "<li>Balcony</li>" : ""}
+                </ul>
+            `;
+            var myModal = new bootstrap.Modal(document.getElementById('roomDetailsModal'));
+            myModal.show();
+        })
+        .catch(error => {
+            console.error('Error fetching room details:', error);
+        });
+}
+
     </script>
 </body>
 
