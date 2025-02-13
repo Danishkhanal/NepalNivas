@@ -152,3 +152,81 @@
       </div>
     </div>
   </div>
+  <?php 
+    if(isset($_GET['cancel_status'])){
+      alert('success','Booking Cancelled!');
+    }  
+    else if(isset($_GET['review_status'])){
+      alert('success','Thank you for rating & review!');
+    }  
+  ?>
+
+  <?php require('inc/footer.php'); ?>
+
+  <script>
+    function cancel_booking(id)
+    {
+      if(confirm('Are you sure to cancel booking?'))
+      {        
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST","ajax/cancel_booking.php",true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function(){
+          if(this.responseText==1){
+            window.location.href="bookings.php?cancel_status=true";
+          }
+          else{
+            alert('error','Cancellation Failed!');
+          }
+        }
+
+        xhr.send('cancel_booking&id='+id);
+      }
+    }
+
+    let review_form = document.getElementById('review-form');
+
+    function review_room(bid,rid){
+      review_form.elements['booking_id'].value = bid;
+      review_form.elements['room_id'].value = rid;
+    }
+
+    review_form.addEventListener('submit',function(e){
+      e.preventDefault();
+
+      let data = new FormData();
+
+      data.append('review_form','');
+      data.append('rating',review_form.elements['rating'].value);
+      data.append('review',review_form.elements['review'].value);
+      data.append('booking_id',review_form.elements['booking_id'].value);
+      data.append('room_id',review_form.elements['room_id'].value);
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","ajax/review_room.php",true);
+
+      xhr.onload = function()
+      {
+
+        if(this.responseText == 1)
+        {
+          window.location.href = 'bookings.php?review_status=true';
+        }
+        else{
+          var myModal = document.getElementById('reviewModal');
+          var modal = bootstrap.Modal.getInstance(myModal);
+          modal.hide();
+  
+          alert('error',"Rating & Review Failed!");
+        }
+      }
+
+      xhr.send(data);
+    })
+
+  </script>
+
+
+</body>
+</html>
