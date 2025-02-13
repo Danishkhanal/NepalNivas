@@ -1,784 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NepalNivas - Hotel Rooms</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-    background-color: #f8f9fa; /* Light gray background */
-    font-family: 'Arial', sans-serif;
-    color: #333;
-}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link  rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+  <?php require('inc/links.php'); ?>
+  <title><?php echo $settings_r['site_title'] ?> - HOME</title>
+  <style>
+    .availability-form{
+      margin-top: -50px;
+      z-index: 2;
+      position: relative;
+    }
 
-.container {
-    font-family: 'Arial', sans-serif;
-}
-
-header {
-    margin-bottom: 30px;
-}
-
-h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #e74c3c; /* Vibrant red for headings */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.room-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.room-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-title {
-    font-weight: bold;
-    color: #3498db; /* Vibrant blue for card titles */
-}
-
-.btn-primary,
-.btn-danger,
-.btn-secondary {
-    padding: 12px 24px;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.btn-primary {
-    background-color: #2980b9; /* Bright blue for primary button */
-    border: none;
-}
-
-.btn-danger {
-    background-color: #e74c3c; /* Vibrant red for danger button */
-    border: none;
-}
-
-.btn-secondary {
-    background-color: #16a085; /* Bright teal for secondary button */
-    border: none;
-}
-
-.btn:hover {
-    opacity: 0.85;
-}
-
-.room-checkbox {
-    margin-top: 10px;
-}
-
-.comparison-table {
-    margin-top: 30px;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.comparison-table th,
-.comparison-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-.comparison-table th {
-    background-color: #2c3e50; /* Darker blue for table header */
-    color: white;
-}
-
-.comparison-table td {
-    background-color: #ecf0f1; /* Light gray for table cells */
-}
-
-.comparison-results {
-    margin-top: 30px;
-}
-
-.navbar-brand {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: #f39c12; /* Golden color for navbar brand */
-}
-
-.navbar-nav {
-    flex-direction: row;
-}
-
-.navbar-nav .nav-item {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.navbar-nav .nav-link {
-    font-size: 1rem;
-    color: #34495e; /* Slightly lighter color for nav links */
-}
-
-.form-container {
-    text-align: center;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-    height: 400px;
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly more transparent white */
-    border-radius: 10px;
-    position: relative;
-}
-
-.form-heading {
-    font-size: 1.8rem; /* Slightly larger font size */
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-weight: bold;
-    color: #2980b9; /* Vibrant blue for form labels */
-}
-
-.form-group select,
-.form-group input {
-    padding: 10px;
-    font-size: 1rem;
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 15px;
-}
-
-.btn-submit {
-    background-color: #2980b9;
-    color: white;
-    font-weight: bold;
-    width: 100%;
-    padding: 12px;
-    border-radius: 5px;
-}
-
-.btn-submit:hover {
-    background-color: #3498db; /* Lighter blue on hover */
-}
-
-.background-image-section {
-    background-image: url('images/background.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 450px; /* Increased height for more impact */
-    position: relative;
-    margin-bottom: 30px;
-}
-
-.room-availability-section {
-    background-color: rgba(255, 255, 255, 0.9); /* White background with opacity */
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 30px;
-}
-
-.image-upload-section {
-    margin-top: 20px;
-    text-align: center;
-    padding: 30px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-}
-
-.upload-btn {
-    background-color: #16a085; /* Bright teal */
-    color: white;
-    padding: 12px 24px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-}
-
-.upload-btn:hover {
-    background-color: #1abc9c; /* Slightly lighter teal on hover */
-}
-
-#testimonialCarousel {
-    /* Removed extra padding */
-}
-
-#testimonialCarousel .carousel-item {
-    transition: transform 0.6s ease-in-out;
-}
-
-#testimonialCarousel .card {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    border: none;
-    margin: 0 auto;
-    max-width: 650px; /* Increased card width */
-}
-
-.testimonial-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.carousel-indicators {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-}
-
-.carousel-indicators button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin: 0 5px;
-    background-color: #e74c3c; /* Vibrant red for indicators */
-    border: 0;
-}
-
-.carousel-indicators .active {
-    opacity: 1;
-}
-
-.know-more-container {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.know-more-container .btn {
-    padding: 1rem 2rem;
-    background-color: #ffffff; /* White background for 'Know More' button */
-    color: #212529; /* Text color set to #212529 */
-    font-weight: bold;
-    border: 1px solid #212529; /* Optional: adds border for contrast */
-}
-
-.know-more-container .btn:hover {
-    background-color:rgb(54, 57, 60); /* Light gray background on hover */
-    color:rgb(237, 237, 237); /* Keep text color dark on hover */
-}
-
-.text-warning {
-    margin-bottom: 1rem;
-    color: #212529; /* Text color set to #212529 */
-    background-color: #ffffff; /* White background for warning text */
-}
-/* Styling for Reach Us Section */
-.container {
-    font-family: 'Arial', sans-serif;
-}
-
-h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #2c3e50; /* Dark color for headings */
-}
-
-.map-placeholder {
-    margin-bottom: 20px;
-}
-
-.phone-contact {
-    margin-bottom: 20px;
-}
-
-.phone-contact .btn {
-    padding: 12px 24px;
-    font-weight: bold;
-    background-color: #2980b9; /* Bright blue */
-    border: none;
-    color: white;
-}
-
-.phone-contact .btn:hover {
-    background-color: #3498db; /* Slightly lighter blue on hover */
-}
-
-.social-media .btn {
-    padding: 10px 20px;
-    font-weight: bold;
-    color: white;
-}
-
-.social-media .btn:hover {
-    opacity: 0.85;
-}
-
-.social-media .btn-primary {
-    background-color: #3b5998; /* Facebook Blue */
-}
-
-.social-media .btn-info {
-    background-color: #00acee; /* Twitter Blue */
-}
-
-.social-media .btn-danger {
-    background-color: #c13584; /* Instagram Red */
-}
-/* Styling for Footer */
-.footer {
-  background-color: #333;
-  color: white;
-}
-
-.footer h3, .footer h5 {
-  font-weight: bold;
-}
-
-.footer a {
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-.footer .row {
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer .col-md-4 {
-  flex: 1;
-}
-
-.footer .m-2 {
-  margin: 0 10px;
-}
-
-
-    </style>
+    @media screen and (max-width: 575px) {
+      .availability-form{
+        margin-top: 25px;
+        padding: 0 35px;
+      } 
+    }
+  </style>
 </head>
+<body class="bg-light">
 
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <!-- Site Name/Logo on the left -->
-            <a class="navbar-brand" href="#">NepalNivas</a>
-            
-            <!-- Navigation Links in the center -->
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Rooms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Facilities</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                </ul>
-            </div>
+  <?php require('inc/header.php'); ?>
 
-            <!-- Login/Register Buttons on the right -->
-            <div class="d-flex">
-                <?php if (isset($_SESSION['username'])): ?>
-                    <p class="mb-0 me-3">Welcome, <?php echo $_SESSION['username']; ?>!</p>
-                    <a href="profile.php" class="btn btn-secondary">Profile</a>
-                    <a href="logout.php" class="btn btn-danger ms-2">Logout</a>
-                <?php else: ?>
-                    <a href="login.php" class="btn btn-primary me-2">Login</a>
-                    <a href="register.php" class="btn btn-success">Register</a>
-                <?php endif; ?>
-            </div>
-        </div>
-    </nav>
+  <!-- Carousel -->
 
-    <!-- Background Image Section -->
-    <div class="background-image-section">
-        <!-- This section serves as a space for background image -->
-    </div>
-
-    <!-- Booking Availability Form with Background Image -->
-    <div class="form-container">
-        <h2 class="form-heading">Check Room Availability</h2>
-        <form>
-            <!-- Check-in Date -->
-            <div class="form-group mb-3">
-                <label for="checkinDate">Check-in Date</label>
-                <input type="date" class="form-control" id="checkinDate" required>
-            </div>
-
-            <!-- Check-out Date -->
-            <div class="form-group mb-3">
-                <label for="checkoutDate">Check-out Date</label>
-                <input type="date" class="form-control" id="checkoutDate" required>
-            </div>
-
-            <!-- Adults -->
-            <div class="form-group mb-3">
-                <label for="adults">Adults</label>
-                <select class="form-control" id="adults">
-                    <option value="1">1 Adult</option>
-                    <option value="2">2 Adults</option>
-                    <option value="3">3 Adults</option>
-                    <option value="4">4 Adults</option>
-                    <option value="5">5 Adults</option>
-                    <option value="6">6 Adults</option>
-                </select>
-            </div>
-
-            <!-- Children -->
-            <div class="form-group mb-3">
-                <label for="children">Children</label>
-                <select class="form-control" id="children">
-                    <option value="0">No Children</option>
-                    <option value="1">1 Child</option>
-                    <option value="2">2 Children</option>
-                    <option value="3">3 Children</option>
-                    <option value="4">4 Children</option>
-                </select>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-submit">Check Availability</button>
-        </form>
-    </div>
-
-    <!-- Room Availability Section with White Background -->
-    <div class="container room-availability-section">
-        <header class="my-4 text-center">
-            <h1>NepalNivas - Available Rooms</h1>
-        </header>
-
-        <!-- Available Rooms Section -->
-        <div class="row">
-            <?php
-            include('db.php');
-            $sql = "SELECT * FROM rooms WHERE availability = 1";
-            $result = $conn->query($sql);
-            while ($row = $result->fetch_assoc()) { ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card room-card">
-                        <img src="<?php echo $row['image']; ?>" class="card-img-top" alt="Room Image">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['room_name']; ?></h5>
-                            <p class="card-text"><?php echo $row['description']; ?></p>
-                            <p><strong>Price: $<?php echo $row['price']; ?></strong></p>
-                            <input type="checkbox" class="room-checkbox" value="<?php echo $row['id']; ?>"> Select this room for comparison
-                            <br>
-                            <button type="button" class="btn btn-info mt-2" onclick="viewDetails(<?php echo $row['id']; ?>)">View Details</button>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-        <form onsubmit="event.preventDefault(); compareRooms();">
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Compare</button>
-            </div>
-        </form>
-
-        <div class="text-center mt-3">
-            <button class="btn btn-secondary">More Rooms</button>
-        </div>
-
-        <div id="comparison-results" class="comparison-results">
-            <!-- Comparison results will be shown here -->
-        </div>
-    </div>
-
-    <!-- Our Facilities Section -->
-    <div class="container">
-        <h2 class="text-center my-4">Our Facilities</h2>
-        <div class="row">
-            <?php
-            // Assuming you have a facilities table
-            $sql_facilities = "SELECT * FROM facilities"; // Adjust SQL as per your database
-            $result_facilities = $conn->query($sql_facilities);
-            while ($facility = $result_facilities->fetch_assoc()) { ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $facility['name']; ?></h5>
-                            <p class="card-text"><?php echo $facility['description']; ?></p>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </div>
-
-    <!-- More Facilities Button -->
-<div class="container text-center mb-5">
-    <button class="btn btn-outline-dark">More Facilities >>></button>
-</div>
-
-<div class="container mb-5">
-    <h2 class="text-center mb-4">Guests</h2>
-
-    <div class="testimonial-container">
-        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-
-                <div class="carousel-item active">  <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="Testimonials\Rambo.jpg" class="rounded-circle me-3" alt="Profile">
-                                <h5 class="card-title mb-0">Rambo</h5>
-                            </div>
-                            <p class="card-text">asdlkfj Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero
-sed tempore illo atque beatae asperiores, adipisci dicta quia nisi voluptates impedit
-perspiciatis, nobis libero culpa error officiis totam</p>
-                            <div class="text-warning">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item"> <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="Testimonials\Sita.jpg" class="rounded-circle me-3" alt="Profile">
-                                <h5 class="card-title mb-0">Sita</h5>
-                            </div>
-                            <p class="card-text">asdlkfj Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero
-sed tempore illo atque beatae asperiores, adipisci dicta quia nisi voluptates impedit
-perspiciatis, nobis libero culpa error officiis totam</p>
-                            <div class="text-warning">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item"> <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="Testimonials\bill.jpg" class="rounded-circle me-3" alt="Profile">
-                                <h5 class="card-title mb-0">Bill</h5>
-                            </div>
-                            <p class="card-text">asdlkfj Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos voluptate vero
-sed tempore illo atque beatae asperiores, adipisci dicta quia nisi voluptates impedit
-perspiciatis, nobis libero culpa error officiis totam</p>
-                            <div class="text-warning">
-                                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 2"></button>
-            </div>
-        </div>
-
-        <div class="know-more-container">
-            <button class="btn btn-outline-dark btn-lg">Know More >>></button>
-        </div>
-    </div>
-</div>
-
-<script>
-    var testimonialCarousel = new bootstrap.Carousel(document.getElementById('testimonialCarousel'), {
-        interval: 30
-    });
-</script>
-
-<!-- Reach Us Section -->
-<div class="container text-center mt-5">
-    <h2 class="mb-4">Reach us with</h2>
-
-    <!-- Map Placeholder -->
-    <div class="map-placeholder mb-4">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.270639087445!2d85.3240!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19178b97e8cf%3A0x9ebc47bdfb99b97d!2sKathmandu!5e0!3m2!1sen!2snp!4v1606444823271!5m2!1sen!2snp" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-
-    <!-- Phone Contact -->
-    <div class="phone-contact mb-4">
-        <p><strong>Contact Us By Phone:</strong></p>
-        <p><a href="tel:+97701565656" class="btn btn-secondary">Call Us: -9779822222222</a></p>
-    </div>
-
-    <!-- Social Media Links -->
-    <div class="social-media mb-4">
-        <p><strong>Connect with us on Social Media:</strong></p>
-        <a href="https://facebook.com" target="_blank" class="btn btn-primary m-2">Facebook</a>
-        <a href="https://twitter.com" target="_blank" class="btn btn-info m-2">Twitter</a>
-        <a href="https://instagram.com" target="_blank" class="btn btn-danger m-2">Instagram</a>
-    </div>
-</div>
-<!-- Footer Section -->
-<footer class="footer mt-5 py-4 bg-dark text-white">
-  <div class="container">
-    <div class="row">
-      <!-- Left Section: Website Name/Logo and Brief Description -->
-      <div class="col-md-4 mb-4">
-        <h3 class="text-white">NepalNvas</h3>
-        <p class="text-white">NepalNvas is your gateway to the best accommodations and travel experiences in Nepal. Discover a unique blend of comfort and culture, tailored just for you.</p>
-      </div>
-
-      <!-- Center Section: Links (Site Map/Navigation) -->
-      <div class="col-md-4 mb-4">
-        <h5 class="text-white">Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class="text-white">Home</a></li>
-          <li><a href="#" class="text-white">Rooms</a></li>
-          <li><a href="#" class="text-white">Facilities</a></li>
-          <li><a href="#" class="text-white">Contact Us</a></li>
-          <li><a href="#" class="text-white">About</a></li>
-        </ul>
-      </div>
-
-      <!-- Right Section: Social Media Links -->
-      <div class="col-md-4 mb-4">
-        <h5 class="text-white">Follow Us</h5>
-        <div>
-          <a href="https://facebook.com" target="_blank" class="text-white m-2">
-            <i class="fab fa-facebook-f"></i> Facebook
-          </a>
-          <a href="https://twitter.com" target="_blank" class="text-white m-2">
-            <i class="fab fa-twitter"></i> Twitter
-          </a>
-          <a href="https://instagram.com" target="_blank" class="text-white m-2">
-            <i class="fab fa-instagram"></i> Instagram
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer Bottom Section: Copyright Information -->
-    <div class="row">
-      <div class="col-12 text-center">
-        <p class="mb-0">&copy; 2025 NepalNvas. All rights reserved.</p>
+  <div class="container-fluid px-lg-4 mt-4">
+    <div class="swiper swiper-container">
+      <div class="swiper-wrapper">
+        <?php 
+          $res = selectAll('carousel');
+          while($row = mysqli_fetch_assoc($res))
+          {
+            $path = CAROUSEL_IMG_PATH;
+            echo <<<data
+              <div class="swiper-slide">
+                <img src="$path$row[image]" class="w-100 d-block">
+              </div>
+            data;
+          }
+        ?>
       </div>
     </div>
   </div>
-</footer>
 
-    <!-- Modal for Room Details -->
-    <div class="modal fade" id="roomDetailsModal" tabindex="-1" aria-labelledby="roomDetailsModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="roomDetailsModalLabel">Room Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="roomDetailsModalBody">
-                    <!-- Room details will be dynamically inserted here -->
-                </div>
+  <!-- check availability form -->
+
+  <div class="container availability-form">
+    <div class="row">
+      <div class="col-lg-12 bg-white shadow p-4 rounded">
+        <h5 class="mb-4">Check Booking Availability</h5>
+        <form action="rooms.php">
+          <div class="row align-items-end">
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight: 500;">Check-in</label>
+              <input type="date" class="form-control shadow-none" name="checkin" required>
             </div>
-        </div>
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight: 500;">Check-out</label>
+              <input type="date" class="form-control shadow-none" name="checkout" required>
+            </div>
+            <div class="col-lg-3 mb-3">
+              <label class="form-label" style="font-weight: 500;">Adult</label>
+              <select class="form-select shadow-none" name="adult">
+                <?php 
+                  $guests_q = mysqli_query($con,"SELECT MAX(adult) AS `max_adult`, MAX(children) AS `max_children` 
+                    FROM `rooms` WHERE `status`='1' AND `removed`='0'");  
+                  $guests_res = mysqli_fetch_assoc($guests_q);
+                  
+                  for($i=1; $i<=$guests_res['max_adult']; $i++){
+                    echo"<option value='$i'>$i</option>";
+                  }
+                ?>
+              </select>
+            </div>
+            <div class="col-lg-2 mb-3">
+              <label class="form-label" style="font-weight: 500;">Children</label>
+              <select class="form-select shadow-none" name="children">
+                <?php 
+                  for($i=1; $i<=$guests_res['max_children']; $i++){
+                    echo"<option value='$i'>$i</option>";
+                  }
+                ?>
+              </select>
+            </div>
+            <input type="hidden" name="check_availability">
+            <div class="col-lg-1 mb-lg-3 mt-2">
+              <button type="submit" class="btn text-white shadow-none custom-bg">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <!-- Bootstrap JS and Dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <script>
-        // Function to compare rooms
-        function compareRooms() {
-            const selectedRooms = [];
-            document.querySelectorAll('.room-checkbox:checked').forEach(checkbox => {
-                selectedRooms.push(checkbox.value);
-            });
+  <!-- Our Rooms -->
 
-            if (selectedRooms.length === 0) {
-                alert('Please select at least one room for comparison.');
-                return;
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">OUR ROOMS</h2>
+
+  <div class="container">
+    <div class="row">
+
+      <?php 
+            
+        $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=? ORDER BY `id` DESC LIMIT 3",[1,0],'ii');
+
+        while($room_data = mysqli_fetch_assoc($room_res))
+        {
+          // get features of room
+
+          $fea_q = mysqli_query($con,"SELECT f.name FROM `features` f 
+            INNER JOIN `room_features` rfea ON f.id = rfea.features_id 
+            WHERE rfea.room_id = '$room_data[id]'");
+
+          $features_data = "";
+          while($fea_row = mysqli_fetch_assoc($fea_q)){
+            $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
+              $fea_row[name]
+            </span>";
+          }
+
+          // get facilities of room
+
+          $fac_q = mysqli_query($con,"SELECT f.name FROM `facilities` f 
+            INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id 
+            WHERE rfac.room_id = '$room_data[id]'");
+
+          $facilities_data = "";
+          while($fac_row = mysqli_fetch_assoc($fac_q)){
+            $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
+              $fac_row[name]
+            </span>";
+          }
+
+          // get thumbnail of image
+
+          $room_thumb = ROOMS_IMG_PATH."thumbnail.jpg";
+          $thumb_q = mysqli_query($con,"SELECT * FROM `room_images` 
+            WHERE `room_id`='$room_data[id]' 
+            AND `thumb`='1'");
+
+          if(mysqli_num_rows($thumb_q)>0){
+            $thumb_res = mysqli_fetch_assoc($thumb_q);
+            $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
+          }
+
+          $book_btn = "";
+
+          if(!$settings_r['shutdown']){
+            $login=0;
+            if(isset($_SESSION['login']) && $_SESSION['login']==true){
+              $login=1;
             }
 
-            // Send selected room IDs to the server for comparison
-            fetch('compare_rooms.php', {
-                method: 'POST',
-                body: JSON.stringify({ roomIds: selectedRooms }), // Send as JSON
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);  // Display error if there is an issue
-                } else {
-                    let comparisonTable = '<table class="comparison-table">';
-                    comparisonTable += '<thead><tr><th>Room Name</th><th>Description</th><th>Price</th><th>Wi-Fi</th><th>TV</th><th>AC</th><th>Minibar</th><th>Bathroom</th><th>Balcony</th></tr></thead><tbody>';
+            $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-sm text-white custom-bg shadow-none'>Book Now</button>";
+          }
 
-                    // Loop through each room data and create a table row
-                    data.forEach(room => {
-                        comparisonTable += `
-                            <tr>
-                                <td>${room.room_name}</td>
-                                <td>${room.description}</td>
-                                <td>$${room.price}</td>
-                                <td>${room.wifi == 1 ? 'Yes' : 'No'}</td>
-                                <td>${room.tv == 1 ? 'Yes' : 'No'}</td>
-                                <td>${room.ac == 1 ? 'Yes' : 'No'}</td>
-                                <td>${room.minibar == 1 ? 'Yes' : 'No'}</td>
-                                <td>${room.bathroom == 1 ? 'Yes' : 'No'}</td>
-                                <td>${room.balcony == 1 ? 'Yes' : 'No'}</td>
-                            </tr>
-                        `;
-                    });
+          $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+            WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
 
-                    comparisonTable += '</tbody></table>';
+          $rating_res = mysqli_query($con,$rating_q);
+          $rating_fetch = mysqli_fetch_assoc($rating_res);
 
-                    // Display the comparison table
-                    document.getElementById('comparison-results').innerHTML = comparisonTable;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching comparison data:', error);
-            });
+          $rating_data = "";
+
+          if($rating_fetch['avg_rating']!=NULL)
+          {
+            $rating_data = "<div class='rating mb-4'>
+              <h6 class='mb-1'>Rating</h6>
+              <span class='badge rounded-pill bg-light'>
+            ";
+
+            for($i=0; $i<$rating_fetch['avg_rating']; $i++){
+              $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
+            }
+
+            $rating_data .= "</span>
+              </div>
+            ";
+          }
+
+          // print room card
+
+          echo <<<data
+            <div class="col-lg-4 col-md-6 my-3">
+              <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
+                <img src="$room_thumb" class="card-img-top">
+                <div class="card-body">
+                  <h5>$room_data[name]</h5>
+                  <h6 class="mb-4">रू$room_data[price] per night</h6>
+                  <div class="features mb-4">
+                    <h6 class="mb-1">Features</h6>
+                    $features_data
+                  </div>
+                  <div class="facilities mb-4">
+                    <h6 class="mb-1">Facilities</h6>
+                    $facilities_data
+                  </div>
+                  <div class="guests mb-4">
+                    <h6 class="mb-1">Guests</h6>
+                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                      $room_data[adult] Adults
+                    </span>
+                    <span class="badge rounded-pill bg-light text-dark text-wrap">
+                      $room_data[children] Children
+                    </span>
+                  </div>
+                  $rating_data
+                  <div class="d-flex justify-content-evenly mb-2">
+                    $book_btn
+                    <a href="room_details.php?id=$room_data[id]" class="btn btn-sm btn-outline-dark shadow-none">More details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          data;
+
         }
 
-        // Function to view details of a room
-        function viewDetails(roomId) {
-    fetch('get_room_details.php?id=' + roomId)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(data.error);  // Show error if room is not found
-                return;
+      ?>
+
+      <div class="col-lg-12 text-center mt-5">
+        <a href="rooms.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Rooms >>></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Facilities -->
+
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">OUR FACILITIES</h2>
+
+  <div class="container">
+    <div class="row justify-content-evenly px-lg-0 px-md-0 px-5">
+      <?php 
+        $res = mysqli_query($con,"SELECT * FROM `facilities` ORDER BY `id` DESC LIMIT 5");
+        $path = FACILITIES_IMG_PATH;
+
+        while($row = mysqli_fetch_assoc($res)){
+          echo<<<data
+            <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-3">
+              <img src="$path$row[icon]" width="60px">
+              <h5 class="mt-3">$row[name]</h5>
+            </div>
+          data;
+        }
+      ?>
+
+      <div class="col-lg-12 text-center mt-5">
+        <a href="facilities.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">More Facilities >>></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Reviews</h2>
+
+  <div class="container mt-5">
+    <div class="swiper swiper-testimonials">
+      <div class="swiper-wrapper mb-5">
+        <?php
+
+          $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
+            INNER JOIN `user_cred` uc ON rr.user_id = uc.id
+            INNER JOIN `rooms` r ON rr.room_id = r.id
+            ORDER BY `sr_no` DESC LIMIT 6";
+
+          $review_res = mysqli_query($con,$review_q);
+          $img_path = USERS_IMG_PATH;
+
+          if(mysqli_num_rows($review_res)==0){
+            echo 'No reviews yet!';
+          }
+          else
+          {
+            while($row = mysqli_fetch_assoc($review_res))
+            {
+              $stars = "<i class='bi bi-star-fill text-warning'></i> ";
+              for($i=1; $i<$row['rating']; $i++){
+                $stars .= " <i class='bi bi-star-fill text-warning'></i>";
+              }
+
+              echo<<<slides
+                <div class="swiper-slide bg-white p-4">
+                  <div class="profile d-flex align-items-center mb-3">
+                    <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
+                    <h6 class="m-0 ms-2">$row[uname]</h6>
+                  </div>
+                  <p>
+                    $row[review]
+                  </p>
+                  <div class="rating">
+                    $stars
+                  </div>
+                </div>
+              slides;
             }
+          }
+        
+        ?>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="col-lg-12 text-center mt-5">
+      <a href="about.php" class="btn btn-sm btn-outline-dark rounded-0 fw-bold shadow-none">Know More >>></a>
+    </div>
+  </div>
 
-            // Display room details
-            document.getElementById('roomDetailsModalLabel').textContent = data.room_name;
-            document.getElementById('roomDetailsModalBody').innerHTML = `
-                <img src="${data.image}" class="img-fluid mb-3" alt="Room Image">
-                <p><strong>Description:</strong> ${data.description}</p>
-                <p><strong>Price:</strong> $${data.price}</p>
-                
-                <p><strong>Amenities:</strong></p>
-                <ul>
-                    ${data.wifi == 1 ? "<li>Wi-Fi</li>" : ""}
-                    ${data.tv == 1 ? "<li>TV</li>" : ""}
-                    ${data.ac == 1 ? "<li>AC</li>" : ""}
-                    ${data.minibar == 1 ? "<li>Minibar</li>" : ""}
-                    ${data.bathroom == 1 ? "<li>Bathroom</li>" : ""}
-                    ${data.balcony == 1 ? "<li>Balcony</li>" : ""}
-                </ul>
-            `;
-            var myModal = new bootstrap.Modal(document.getElementById('roomDetailsModal'));
-            myModal.show();
-        })
-        .catch(error => {
-            console.error('Error fetching room details:', error);
-        });
-}
+  <!-- Reach us -->
 
-    </script>
-</body>
+  <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">REACH US</h2>
 
-</html>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 p-4 mb-lg-0 mb-3 bg-white rounded">
+        <iframe class="w-100 rounded" height="320px" src="<?php echo $contact_r['iframe'] ?>" loading="lazy"></iframe>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="bg-white p-4 rounded mb-4">
+          <h5>Call us</h5>
+          <a href="tel: +<?php echo $contact_r['pn1'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
+            <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
+          </a>
+          <br>
+          <?php 
+            if($contact_r['pn2']!=''){
+              echo<<<data
+                <a href="tel: +$contact_r[pn2]" class="d-inline-block text-decoration-none text-dark">
+                  <i class="bi bi-telephone-fill"></i> +$contact_r[pn2]
+                </a>
+              data;
+            }
+          
+          ?>
+        </div>
+        <div class="bg-white p-4 rounded mb-4">
+          <h5>Follow us</h5>
+          <?php 
+            if($contact_r['tw']!=''){
+              echo<<<data
+                <a href="$contact_r[tw]" class="d-inline-block mb-3">
+                  <span class="badge bg-light text-dark fs-6 p-2"> 
+                  <i class="bi bi-twitter me-1"></i> Twitter
+                  </span>
+                </a>
+                <br>
+              data;
+            }
+          ?>
+
+          <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block mb-3">
+            <span class="badge bg-light text-dark fs-6 p-2"> 
+            <i class="bi bi-facebook me-1"></i> Facebook
+            </span>
+          </a>
+          <br>
+          <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block">
+            <span class="badge bg-light text-dark fs-6 p-2"> 
+            <i class="bi bi-instagram me-1"></i> Instagram
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
