@@ -255,7 +255,7 @@
     </div>
   </div>
 
-  <!-- Reviews -->
+  <!-- Testimonials -->
 
   <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Reviews</h2>
 
@@ -344,7 +344,7 @@
               echo<<<data
                 <a href="$contact_r[tw]" class="d-inline-block mb-3">
                   <span class="badge bg-light text-dark fs-6 p-2"> 
-                  <i class="bi bi-twitter me-1"></i> Twitter
+                  <i class="bi bi-x me-1"></i> X
                   </span>
                 </a>
                 <br>
