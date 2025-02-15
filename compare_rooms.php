@@ -48,3 +48,33 @@ if (isset($_POST['room_ids'])) {
             echo "<th>Room</th><th>Guests (Adults)</th><th>Guests (Children)</th><th>Features</th><th>Facilities</th>";
             echo "</tr></thead>";
             echo "<tbody>";
+            foreach ($rooms_data as $room) {
+                echo "<tr>";
+                echo "<td>" . $room['room_name'] . "</td>";
+                echo "<td>" . $room['adult'] . "</td>";
+                echo "<td>" . $room['children'] . "</td>";
+                echo "<td>" . $room['features'] . "</td>";
+                echo "<td>" . $room['facilities'] . "</td>";
+                echo "</tr>";
+            }
+
+            echo "</tbody></table>";
+            echo "</div>"; // Close responsive wrapper
+
+            mysqli_free_result($result);
+        } else {
+            error_log("Database error: " . mysqli_error($con));
+            echo "<p>Error fetching data. Please try again later.</p>";
+        }
+
+        mysqli_stmt_close($stmt);
+    } else {
+        error_log("Statement preparation error: " . mysqli_error($con));
+        echo "<p>Error preparing query. Please try again later.</p>";
+    }
+
+    mysqli_close($con);
+} else {
+    echo "<p>Invalid request.</p>";
+}
+?>
