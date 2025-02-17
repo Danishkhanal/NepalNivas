@@ -81,3 +81,50 @@
         </div>
 
       </div>
+      <div class="col-lg-5 col-md-12 px-4">
+        <div class="card mb-4 border-0 shadow-sm rounded-3">
+          <div class="card-body">
+            <?php 
+
+              echo<<<price
+                <h4>NPR$room_data[price] per night</h4>
+              price;
+
+              $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+                WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+  
+              $rating_res = mysqli_query($con,$rating_q);
+              $rating_fetch = mysqli_fetch_assoc($rating_res);
+    
+              $rating_data = "";
+    
+              if($rating_fetch['avg_rating']!=NULL)
+              {
+                for($i=0; $i < $rating_fetch['avg_rating']; $i++){
+                  $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
+                }
+              }
+
+              echo<<<rating
+                <div class="mb-3">
+                  $rating_data
+                </div>
+              rating;
+
+              $fea_q = mysqli_query($con,"SELECT f.name FROM `features` f 
+                INNER JOIN `room_features` rfea ON f.id = rfea.features_id 
+                WHERE rfea.room_id = '$room_data[id]'");
+
+              $features_data = "";
+              while($fea_row = mysqli_fetch_assoc($fea_q)){
+                $features_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
+                  $fea_row[name]
+                </span>";
+              }
+
+              echo<<<features
+                <div class="mb-3">
+                  <h6 class="mb-1">Features</h6>
+                  $features_data
+                </div>
+              features;
