@@ -128,3 +128,120 @@
                   $features_data
                 </div>
               features;
+              $fac_q = mysqli_query($con,"SELECT f.name FROM `facilities` f 
+                INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id 
+                WHERE rfac.room_id = '$room_data[id]'");
+
+              $facilities_data = "";
+              while($fac_row = mysqli_fetch_assoc($fac_q)){
+                $facilities_data .="<span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
+                  $fac_row[name]
+                </span>";
+              }
+              
+              echo<<<facilities
+                <div class="mb-3">
+                  <h6 class="mb-1">Facilities</h6>
+                  $facilities_data
+                </div>
+              facilities;
+
+              echo<<<guests
+                <div class="mb-3">
+                  <h6 class="mb-1">Guests</h6>
+                  <span class="badge rounded-pill bg-light text-dark text-wrap">
+                    $room_data[adult] Adults
+                  </span>
+                  <span class="badge rounded-pill bg-light text-dark text-wrap">
+                    $room_data[children] Children
+                  </span>
+                </div>
+              guests;
+
+              echo<<<area
+                <div class="mb-3">
+                  <h6 class="mb-1">Area</h6>
+                  <span class='badge rounded-pill bg-light text-dark text-wrap me-1 mb-1'>
+                    $room_data[area] sq. ft.
+                  </span>
+                </div>
+              area;
+
+              if(!$settings_r['shutdown']){
+                $login=0;
+                if(isset($_SESSION['login']) && $_SESSION['login']==true){
+                  $login=1;
+                }
+                echo<<<book
+                  <button onclick='checkLoginToBook($login,$room_data[id])' class="btn w-100 text-white custom-bg shadow-none mb-1">Book Now</button>
+                book;
+              }
+
+            ?>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 mt-4 px-4">
+        <div class="mb-5">
+          <h5>Description</h5>
+          <p>
+            <?php echo $room_data['description'] ?>
+          </p>
+        </div>
+
+        <div>
+          <h5 class="mb-3">Reviews & Ratings</h5>
+
+          <?php
+            $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
+              INNER JOIN `user_cred` uc ON rr.user_id = uc.id
+              INNER JOIN `rooms` r ON rr.room_id = r.id
+              WHERE rr.room_id = '$room_data[id]'
+              ORDER BY `sr_no` DESC LIMIT 15";
+
+            $review_res = mysqli_query($con,$review_q);
+            $img_path = USERS_IMG_PATH;
+
+            if(mysqli_num_rows($review_res)==0){
+              echo 'No reviews yet!';
+            }
+            else
+            {
+              while($row = mysqli_fetch_assoc($review_res))
+              {
+                $stars = "<i class='bi bi-star-fill text-warning'></i> ";
+                for($i=1; $i<$row['rating']; $i++){
+                  $stars .= " <i class='bi bi-star-fill text-warning'></i>";
+                }
+
+                echo<<<reviews
+                  <div class="mb-4">
+                    <div class="d-flex align-items-center mb-2">
+                      <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
+                      <h6 class="m-0 ms-2">$row[uname]</h6>
+                    </div>
+                    <p class="mb-1">
+                      $row[review]
+                    </p>
+                    <div>
+                      $stars
+                    </div>
+                  </div>
+                reviews;
+              }
+            }
+          ?>
+
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <?php require('inc/footer.php'); ?>
+
+</body>
+</html>
