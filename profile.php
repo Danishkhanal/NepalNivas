@@ -78,3 +78,22 @@
           </form>
         </div>
       </div>
+      
+      <div class="col-md-8 mb-5 px-4">
+        <div class="bg-white p-3 p-md-4 rounded shadow-sm">
+          <form id="pass-form">
+            <h5 class="mb-3 fw-bold">Change Password</h5>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">New Password</label>
+                <input name="new_pass" type="password" class="form-control shadow-none" required>
+              </div>
+              <div class="col-md-6 mb-4">
+                <label class="form-label">Confirm Password</label>
+                <input name="confirm_pass" type="password" class="form-control shadow-none" required>
+              </div>
+            </div>
+            <button type="submit" class="btn text-white custom-bg shadow-none">Save Changes</button>
+          </form>
+        </div>
+      </div>
