@@ -99,3 +99,38 @@
       </div>
       </div>
       </div>
+      <?php require('inc/footer.php'); ?>
+
+<script>
+
+  let info_form = document.getElementById('info-form');
+
+  info_form.addEventListener('submit',function(e){
+    e.preventDefault();
+
+    let data = new FormData();
+    data.append('info_form','');
+    data.append('name',info_form.elements['name'].value);
+    data.append('phonenum',info_form.elements['phonenum'].value);
+    data.append('address',info_form.elements['address'].value);
+    data.append('pincode',info_form.elements['pincode'].value);
+    data.append('dob',info_form.elements['dob'].value);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST","ajax/profile.php",true);
+
+    xhr.onload = function(){
+      if(this.responseText == 'phone_already'){
+        alert('error',"Phone number is already registered!");
+      }
+      else if(this.responseText == 0){
+        alert('error',"No Changes Made!");
+      }
+      else{
+        alert('success','Changes saved!');
+      }
+    }
+
+    xhr.send(data);
+
+  });
