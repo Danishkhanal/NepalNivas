@@ -134,3 +134,33 @@
     xhr.send(data);
 
   });
+  let profile_form = document.getElementById('profile-form');
+
+    profile_form.addEventListener('submit',function(e){
+      e.preventDefault();
+
+      let data = new FormData();
+      data.append('profile_form','');
+      data.append('profile',profile_form.elements['profile'].files[0]);
+
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST","ajax/profile.php",true);
+
+      xhr.onload = function()
+      {
+        if(this.responseText == 'inv_img'){
+          alert('error',"Only JPG, WEBP & PNG images are allowed!");
+        }
+        else if(this.responseText == 'upd_failed'){
+          alert('error',"Image upload failed!");
+        }
+        else if(this.responseText == 0){
+          alert('error',"Updation failed!");
+        }
+        else{
+          window.location.href=window.location.pathname;
+        }
+      }
+
+      xhr.send(data);
+    });
