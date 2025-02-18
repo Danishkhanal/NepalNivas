@@ -199,3 +199,11 @@
           pass_form.reset();
         }
       }
+      xhr.send(data);
+    });
+
+  </script>
+
+
+</body>
+</html>
