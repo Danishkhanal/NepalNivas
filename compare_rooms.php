@@ -1,80 +1,89 @@
 <?php
 require('admin/inc/db_config.php');
 
+// Check if room_ids is set in the POST request
 if (isset($_POST['room_ids'])) {
-    $room_ids = explode(',', $_POST['room_ids']);
+    // Debugging: Log the raw POST data to check if the data is received
+    error_log("Received room_ids: " . $_POST['room_ids']);  // Logs to the PHP error log
 
-    if (count($room_ids) < 2) {
-        echo "<p>Please select at least two rooms to compare.</p>";
-        exit;
-    }
-    $placeholders = implode(',', array_fill(0, count($room_ids), '?'));
-    $sql = "SELECT r.name AS room_name, r.adult, r.children, 
-            GROUP_CONCAT(DISTINCT f.name ORDER BY f.name SEPARATOR ', ') AS features, 
-            GROUP_CONCAT(DISTINCT fac.name ORDER BY fac.name SEPARATOR ', ') AS facilities
-            FROM rooms r
-            LEFT JOIN room_features rf ON r.id = rf.room_id
-            LEFT JOIN features f ON rf.features_id = f.id
-            LEFT JOIN room_facilities rfac ON r.id = rfac.room_id
-            LEFT JOIN facilities fac ON rfac.facilities_id = fac.id
-            WHERE r.id IN ($placeholders)
-            GROUP BY r.id";
+    // Decode the JSON-encoded room IDs
+    $room_ids = json_decode($_POST['room_ids']);
+    
+    // Check if the decoded value is an array and not null
+    if (is_array($room_ids)) {
+        // Start building the comparison HTML with Bootstrap classes
+        $comparison_data = '<div class="row">';
 
-    $stmt = mysqli_prepare($con, $sql);
+        // Prepare the queries for fetching room features and facilities
+        $fea_query = $con->prepare("SELECT f.name FROM `features` f 
+            INNER JOIN `room_features` rfea ON f.id = rfea.features_id 
+            WHERE rfea.room_id = ?");
+        $fac_query = $con->prepare("SELECT f.name FROM `facilities` f 
+            INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id 
+            WHERE rfac.room_id = ?");
+        
+        // Fetch details for each room ID
+        foreach ($room_ids as $room_id) {
+            // Fetch room data
+            $room_res = $con->query("SELECT * FROM `rooms` WHERE `id` = $room_id");
+            if ($room_res && $room_res->num_rows > 0) {
+                $room_data = $room_res->fetch_assoc();
 
-    if ($stmt) {
-        $types = str_repeat('i', count($room_ids));
-        mysqli_stmt_bind_param($stmt, $types, ...$room_ids);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+                // Fetch features for the room
+                $fea_query->bind_param('i', $room_id);
+                $fea_query->execute();
+                $fea_result = $fea_query->get_result();
+                $features_data = "<strong>Features:</strong><ul class='list-unstyled'>";
+                while ($fea_row = $fea_result->fetch_assoc()) {
+                    $features_data .= "<li>- " . htmlspecialchars($fea_row['name'], ENT_QUOTES, 'UTF-8') . "</li>";
+                }
+                $features_data .= "</ul>";
 
-        if ($result) {
-            $rooms_data = [];
+                // Fetch facilities for the room
+                $fac_query->bind_param('i', $room_id);
+                $fac_query->execute();
+                $fac_result = $fac_query->get_result();
+                $facilities_data = "<strong>Facilities:</strong><ul class='list-unstyled'>";
+                while ($fac_row = $fac_result->fetch_assoc()) {
+                    $facilities_data .= "<li>- " . htmlspecialchars($fac_row['name'], ENT_QUOTES, 'UTF-8') . "</li>";
+                }
+                $facilities_data .= "</ul>";
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                $rooms_data[] = [
-                    'room_name' => $row['room_name'],
-                    'adult' => $row['adult'],
-                    'children' => $row['children'],
-                    'features' => $row['features'] ?? 'None',
-                    'facilities' => $row['facilities'] ?? 'None',
-                ];
+                // Get guest capacity
+                $guests_data = "<strong>Guests:</strong><ul class='list-unstyled'><li>Adults: " . $room_data['adult'] . "</li><li>Children: " . $room_data['children'] . "</li></ul>";
+
+                // Build the comparison result for each room with Bootstrap classes
+                $comparison_data .= '<div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">' . htmlspecialchars($room_data['name'], ENT_QUOTES, 'UTF-8') . '</h5>
+                            <p class="card-text"><strong>Price:</strong> NPR ' . $room_data['price'] . '</p>
+                            ' . $features_data . '
+                            ' . $facilities_data . '
+                            ' . $guests_data . '
+                        </div>
+                    </div>
+                </div>';
+            } else {
+                $comparison_data .= '<div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Room Not Found</h5>
+                        </div>
+                    </div>
+                </div>';
             }
-
-            // Generate HTML table with Bootstrap styling
-            echo "<div class='table-responsive'>"; // Responsive wrapper
-            echo "<table class='table table-bordered table-hover'>"; // Bootstrap table classes
-            echo "<thead class='table-light'><tr>"; // Light header background
-            echo "<th>Room</th><th>Guests (Adults)</th><th>Guests (Children)</th><th>Features</th><th>Facilities</th>";
-            echo "</tr></thead>";
-            echo "<tbody>";
-            foreach ($rooms_data as $room) {
-                echo "<tr>";
-                echo "<td>" . $room['room_name'] . "</td>";
-                echo "<td>" . $room['adult'] . "</td>";
-                echo "<td>" . $room['children'] . "</td>";
-                echo "<td>" . $room['features'] . "</td>";
-                echo "<td>" . $room['facilities'] . "</td>";
-                echo "</tr>";
-            }
-
-            echo "</tbody></table>";
-            echo "</div>"; // Close responsive wrapper
-
-            mysqli_free_result($result);
-        } else {
-            error_log("Database error: " . mysqli_error($con));
-            echo "<p>Error fetching data. Please try again later.</p>";
         }
 
-        mysqli_stmt_close($stmt);
-    } else {
-        error_log("Statement preparation error: " . mysqli_error($con));
-        echo "<p>Error preparing query. Please try again later.</p>";
-    }
+        // Close the row div
+        $comparison_data .= '</div>';
 
-    mysqli_close($con);
+        // Return the comparison data
+        echo $comparison_data;
+    } else {
+        echo "<div class='alert alert-danger'>Error: Invalid room data!</div>";
+    }
 } else {
-    echo "<p>Invalid request.</p>";
+    echo "<div class='alert alert-danger'>Error: No room IDs received!</div>";
 }
 ?>
