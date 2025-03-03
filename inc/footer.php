@@ -14,3 +14,14 @@
       <a href="contact.php" class="d-inline-block mb-2 text-dark text-decoration-none">Contact us</a> <br>
       <a href="about.php" class="d-inline-block mb-2 text-dark text-decoration-none">About</a>
     </div>
+    <div class="col-lg-4 p-4">
+        <h5 class="mb-3">Follow us</h5>
+        <?php 
+          if($contact_r['tw']!=''){
+            echo<<<data
+              <a href="$contact_r[tw]" class="d-inline-block text-dark text-decoration-none mb-2">
+                <i class="bi bi-x me-1"></i> X
+              </a><br>
+            data;
+          }
+        ?>
