@@ -25,3 +25,12 @@
             data;
           }
         ?>
+        <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark text-decoration-none mb-2">
+          <i class="bi bi-facebook me-1"></i> Facebook
+        </a><br>
+        <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block text-dark text-decoration-none">
+          <i class="bi bi-instagram me-1"></i> Instagram
+        </a><br>
+    </div>
+  </div>
+</div>
