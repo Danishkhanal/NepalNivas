@@ -198,3 +198,87 @@
     </div>
   </div>
 </div>
+<script>
+let roomSelectionArray = [];
+
+function fetchRoomsForComparison() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "admin/ajax/room_list.php?get_rooms_for_comparison=true", true); 
+    xhr.onload = function() {
+        document.getElementById('room-selection-area').innerHTML = this.responseText;
+        initializeRoomSelection();
+    };
+    xhr.send();
+}
+
+function initializeRoomSelection() {
+    roomSelectionArray = [];
+    let checkboxes = document.querySelectorAll('.compare-room-checkbox');
+    let compareBtn = document.getElementById('compare-rooms-btn');
+    let errorP = document.getElementById('compare-rooms-error');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            if (this.checked) {
+                roomSelectionArray.push(parseInt(this.value)); // Add room ID to the array
+            } else {
+                roomSelectionArray = roomSelectionArray.filter((val) => val != parseInt(this.value)); // Remove room ID from the array
+            }
+
+            // Enable the compare button if at least one room is selected
+            if (roomSelectionArray.length > 0) {
+                compareBtn.disabled = false;
+                errorP.style.display = 'none'; // Hide error message
+            } else {
+                compareBtn.disabled = true;
+            }
+        });
+    });
+}
+
+function compareSelectedRooms() {
+    let comparisonArea = document.getElementById('comparison-area');
+    let roomSelectionArea = document.getElementById('room-selection-area');
+
+    if (roomSelectionArray.length < 1) {
+        return false; // No rooms selected
+    }
+
+    // Log the selected room IDs for debugging
+    console.log("Selected Room IDs:", roomSelectionArray);
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "compare_rooms.php", true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Update the comparison area with the response from the server
+            comparisonArea.innerHTML = xhr.responseText;
+
+            // Hide the room selection area and show the comparison area
+            roomSelectionArea.style.display = 'none';
+            comparisonArea.style.display = 'block';
+        } else {
+            console.error("Failed to send request");
+        }
+    };
+
+    xhr.send('room_ids=' + JSON.stringify(roomSelectionArray)); // Send the selected room IDs as JSON
+}
+
+
+
+let compareRoomsModal = document.getElementById('compareRoomsModal');
+compareRoomsModal.addEventListener('shown.bs.modal', function () {
+  fetchRoomsForComparison();
+});
+
+compareRoomsModal.addEventListener('hidden.bs.modal', function () {
+    let comparisonArea = document.getElementById('comparison-area');
+    let roomSelectionArea = document.getElementById('room-selection-area');
+
+    roomSelectionArea.style.display = 'block';
+    comparisonArea.style.display = 'none';
+});
+</script>
