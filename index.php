@@ -191,7 +191,7 @@
                 <img src="$room_thumb" class="card-img-top">
                 <div class="card-body">
                   <h5>$room_data[name]</h5>
-                  <h6 class="mb-4">रू$room_data[price] per night</h6>
+                  <h6 class="mb-4">NPR$room_data[price] per night</h6>
                   <div class="features mb-4">
                     <h6 class="mb-1">Features</h6>
                     $features_data
@@ -255,12 +255,12 @@
     </div>
   </div>
 
-  <!-- Testimonials -->
+  <!-- Reviews -->
 
   <h2 class="mt-5 pt-4 mb-4 text-center fw-bold h-font">Reviews</h2>
 
   <div class="container mt-5">
-    <div class="swiper swiper-testimonials">
+    <div class="swiper swiper-Reviews">
       <div class="swiper-wrapper mb-5">
         <?php
 
@@ -445,7 +445,7 @@
       }
     });
 
-    var swiper = new Swiper(".swiper-testimonials", {
+    var swiper = new Swiper(".swiper-Reviews", {
       effect: "coverflow",
       grabCursor: true,
       centeredSlides: true,
