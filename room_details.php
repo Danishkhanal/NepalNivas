@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -26,6 +26,9 @@
 
     $room_data = mysqli_fetch_assoc($room_res);
   ?>
+
+
+
   <div class="container">
     <div class="row">
 
@@ -81,6 +84,7 @@
         </div>
 
       </div>
+
       <div class="col-lg-5 col-md-12 px-4">
         <div class="card mb-4 border-0 shadow-sm rounded-3">
           <div class="card-body">
@@ -128,6 +132,7 @@
                   $features_data
                 </div>
               features;
+
               $fac_q = mysqli_query($con,"SELECT f.name FROM `facilities` f 
                 INNER JOIN `room_facilities` rfac ON f.id = rfac.facilities_id 
                 WHERE rfac.room_id = '$room_data[id]'");
