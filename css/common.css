@@ -20,3 +20,7 @@
     background-color: var(--teal);
     border: 1px solid var(--teal);
   }
+  .custom-bg:hover{
+    background-color: var(--teal_hover);
+    border-color: var(--teal_hover);
+  }
