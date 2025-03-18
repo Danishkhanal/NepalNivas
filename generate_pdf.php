@@ -81,3 +81,15 @@
         <td>Amount Paid: NPR$data[trans_amt]</td>
       </tr>";
     }
+    $table_data.="</table>";
+
+    $mpdf = new \Mpdf\Mpdf();
+    $mpdf->WriteHTML($table_data);
+    $mpdf->Output($data['order_id'].'.pdf','D');
+
+  }
+  else{
+    header('location: dashboard.php');
+  }
+  
+?>
