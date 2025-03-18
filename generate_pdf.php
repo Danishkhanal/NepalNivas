@@ -24,3 +24,36 @@
       header('location: dashboard.php');
       exit;
     }
+    $data = mysqli_fetch_assoc($res);
+
+    $date = date("h:ia | d-m-Y",strtotime($data['datentime']));
+    $checkin = date("d-m-Y",strtotime($data['check_in']));
+    $checkout = date("d-m-Y",strtotime($data['check_out']));
+
+    $table_data = "
+    <h2>BOOKING RECIEPT</h2>
+    <table border='1'>
+      <tr>
+        <td>Order ID: $data[order_id]</td>
+        <td>Booking Date: $date</td>
+      </tr>
+      <tr>
+        <td colspan='2'>Status: $data[booking_status]</td>
+      </tr>
+      <tr>
+        <td>Name: $data[user_name]</td>
+        <td>Email: $data[email]</td>
+      </tr>
+      <tr>
+        <td>Phone Number: $data[phonenum]</td>
+        <td>Address: $data[address]</td>
+      </tr>
+      <tr>
+        <td>Room Name: $data[room_name]</td>
+        <td>Cost: NPR$data[price] per night</td>
+      </tr>
+      <tr>
+        <td>Check-in: $checkin</td>
+        <td>Check-out: $checkout</td>
+      </tr>
+    ";
