@@ -51,3 +51,36 @@
       else{
         $status_bg = 'bg-warning text-dark';
       }
+
+      $table_data .="
+        <tr>
+          <td>$i</td>
+          <td>
+            <span class='badge bg-primary'>
+              Order ID: $data[order_id]
+            </span>
+            <br>
+            <b>Name:</b> $data[user_name]
+            <br>
+            <b>Phone No:</b> $data[phonenum]
+          </td>
+          <td>
+            <b>Room:</b> $data[room_name]
+            <br>
+            <b>Price:</b> NPR$data[price]
+          </td>
+          <td>
+            <b>Amount:</b> NPR$data[trans_amt]
+            <br>
+            <b>Date:</b> $date
+          </td>
+          <td>
+            <span class='badge $status_bg'>$data[booking_status]</span>
+          </td>
+          <td>
+            <button type='button' onclick='download($data[booking_id])' class='btn btn-outline-success btn-sm fw-bold shadow-none'>
+              <i class='bi bi-file-earmark-arrow-down-fill'></i>
+            </button>
+          </td>
+        </tr>
+      ";
