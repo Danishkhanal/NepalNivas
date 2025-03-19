@@ -4,7 +4,7 @@
   require('../inc/essentials.php');
   date_default_timezone_set("Asia/Kolkata");
   adminLogin();
-  
+
   if(isset($_POST['get_bookings']))
   {
     $frm_data = filteration($_POST);
@@ -33,3 +33,21 @@
       echo $output;
       exit;
     }
+    $i=$start+1;
+    $table_data = "";
+
+    while($data = mysqli_fetch_assoc($limit_res))
+    {
+      $date = date("d-m-Y",strtotime($data['datentime']));
+      $checkin = date("d-m-Y",strtotime($data['check_in']));
+      $checkout = date("d-m-Y",strtotime($data['check_out']));
+
+      if($data['booking_status']=='booked'){
+        $status_bg = 'bg-success';
+      }
+      else if($data['booking_status']=='cancelled'){
+        $status_bg = 'bg-danger';
+      }
+      else{
+        $status_bg = 'bg-warning text-dark';
+      }
