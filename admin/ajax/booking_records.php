@@ -84,3 +84,45 @@
           </td>
         </tr>
       ";
+      $i++;
+    }
+
+    $pagination = "";
+
+    if($total_rows>$limit)
+    {
+      $total_pages = ceil($total_rows/$limit); 
+
+      if($page!=1){
+        $pagination .="<li class='page-item'>
+          <button onclick='change_page(1)' class='page-link shadow-none'>First</button>
+        </li>";
+      }
+
+      $disabled = ($page==1) ? "disabled" : "";
+      $prev= $page-1;
+      $pagination .="<li class='page-item $disabled'>
+        <button onclick='change_page($prev)' class='page-link shadow-none'>Prev</button>
+      </li>";
+
+
+      $disabled = ($page==$total_pages) ? "disabled" : "";
+      $next = $page+1;
+      $pagination .="<li class='page-item $disabled'>
+        <button onclick='change_page($next)' class='page-link shadow-none'>Next</button>
+      </li>";
+
+      if($page!=$total_pages){
+        $pagination .="<li class='page-item'>
+          <button onclick='change_page($total_pages)' class='page-link shadow-none'>Last</button>
+        </li>";
+      }
+
+    }
+
+    $output = json_encode(["table_data"=>$table_data,"pagination"=>$pagination]);
+
+    echo $output;
+  }
+
+?>
