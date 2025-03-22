@@ -56,3 +56,7 @@ input[type=number] {
     background: #f1f1f1;
   }
 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(36,36,36);
+  }
