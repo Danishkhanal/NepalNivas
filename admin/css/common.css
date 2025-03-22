@@ -60,3 +60,8 @@ input[type=number] {
 ::-webkit-scrollbar-thumb {
     background: rgb(36,36,36);
   }
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
