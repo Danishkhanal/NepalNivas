@@ -25,5 +25,14 @@ input[type=number] {
 .custom-bg:hover{
     background-color: var(--teal_hover);
     border-color: var(--teal_hover);
-  }
+}
+
+
+.h-line{
+    width: 150px;
+    margin: 0 auto;
+    height: 1.7px;
+}
+
+
 
