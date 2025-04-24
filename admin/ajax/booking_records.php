@@ -2,7 +2,7 @@
 
   require('../inc/db_config.php');
   require('../inc/essentials.php');
-  date_default_timezone_set("Asia/Kolkata");
+  date_default_timezone_set("Asia/Kathmandu");
   adminLogin();
 
   if(isset($_POST['get_bookings']))
@@ -33,6 +33,7 @@
       echo $output;
       exit;
     }
+
     $i=$start+1;
     $table_data = "";
 
@@ -51,7 +52,7 @@
       else{
         $status_bg = 'bg-warning text-dark';
       }
-
+      
       $table_data .="
         <tr>
           <td>$i</td>
@@ -84,6 +85,7 @@
           </td>
         </tr>
       ";
+
       $i++;
     }
 
