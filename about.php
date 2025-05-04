@@ -21,22 +21,22 @@
     <h2 class="fw-bold h-font text-center">ABOUT US</h2>
     <div class="h-line bg-dark"></div>
     <p class="text-center mt-3">
-    NepalNivas is your ultimate hotel booking platform, offering a wide range of accommodations across Nepal.
-    Find affordable, <br>comfortable stays with easy booking, reliable service, and seamless experiences for all travelers.
+    NepalNivas is your ultimate hotel booking platform, offering a wide range of accommodations across Nepal. 
+    Find affordable, comfortable stays with <br>easy booking, reliable service, and seamless experiences for all travelers.
     </p>
   </div>
 
   <div class="container">
     <div class="row justify-content-between align-items-center">
       <div class="col-lg-6 col-md-5 mb-4 order-lg-1 order-md-1 order-2">
-        <h3 class="mb-3">Chairman</h3>
+        <h3 class="mb-3">Mr.Danish khanal</h3>
         <p>
-        Danish Khanal, the Chairman of NepalNivas, brings expertise and vision to the hospitality industry. 
-        With a focus on excellence, he drives innovation, ensuring exceptional experiences and service for travelers across Nepal.
+        NepalNivas is your ultimate hotel booking platform, offering a wide range of accommodations across Nepal. 
+        Find affordable, comfortable stays with easy booking, reliable service, and seamless experiences for all travelers.
         </p>
       </div>
       <div class="col-lg-5 col-md-5 mb-4 order-lg-2 order-md-2 order-1">
-      <img src="image/User.jpg" class="w-100" style="height: 20;">
+        <img src="images/about/about.jpg" class="w-100">
       </div>
     </div>
   </div>
@@ -69,6 +69,7 @@
       </div>
     </div>
   </div>
+
   <h3 class="my-5 fw-bold h-font text-center">MANAGEMENT TEAM</h3>
 
   <div class="container px-4">
