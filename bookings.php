@@ -57,7 +57,7 @@
             $status_bg = "bg-success";
             if($data['arrival']==1)
             {
-              $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+              $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download Receipt</a>";
  
               if($data['rate_review']==0){
                 $btn.="<button type='button' onclick='review_room($data[booking_id],$data[room_id])' data-bs-toggle='modal' data-bs-target='#reviewModal' class='btn btn-dark btn-sm shadow-none ms-2'>Rate & Review</button>";
@@ -75,26 +75,26 @@
               $btn="<span class='badge bg-primary'>Refund in process!</span>";
             }
             else{
-              $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+              $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download Receipt</a>";
             }
           }
           else
           {
             $status_bg = "bg-warning";
-            $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download PDF</a>";
+            $btn="<a href='generate_pdf.php?gen_pdf&id=$data[booking_id]' class='btn btn-dark btn-sm shadow-none'>Download Receipt</a>";
           }
 
           echo<<<bookings
             <div class='col-md-4 px-4 mb-4'>
               <div class='bg-white p-3 rounded shadow-sm'>
                 <h5 class='fw-bold'>$data[room_name]</h5>
-                <p>₹$data[price] per night</p>
+                <p>NPR$data[price] per night</p>
                 <p>
                   <b>Check in: </b> $checkin <br>
                   <b>Check out: </b> $checkout
                 </p>
                 <p>
-                  <b>Amount: </b> ₹$data[price] <br>
+                  <b>Amount: </b> NPR$data[price] <br>
                   <b>Order ID: </b> $data[order_id] <br>
                   <b>Date: </b> $date
                 </p>
@@ -152,6 +152,9 @@
       </div>
     </div>
   </div>
+
+
+
   <?php 
     if(isset($_GET['cancel_status'])){
       alert('success','Booking Cancelled!');
