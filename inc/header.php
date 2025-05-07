@@ -24,7 +24,7 @@
         <li class="nav-item">
     <button type="button" class="nav-link" data-bs-toggle="modal" data-bs-target="#compareRoomsModal" style="border: none; background: transparent;">Compare Room</button>
 </li>
-</ul>
+      </ul>
       <div class="d-flex">
         <?php
           if(isset($_SESSION['login']) && $_SESSION['login'] == true) {
@@ -87,6 +87,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="registerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -198,6 +199,7 @@
     </div>
   </div>
 </div>
+
 <script>
 let roomSelectionArray = [];
 
