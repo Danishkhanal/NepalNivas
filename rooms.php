@@ -100,7 +100,7 @@
               <!-- Currency Selector -->
               <div class="border bg-light p-3 rounded mb-3">
                 <h5 class="d-flex align-items-center justify-content-between mb-3" style="font-size: 18px;">
-                  <span>CURRENCY</span>
+                  <span>CURRENCY SELECTOR </span>
                 </h5>
                 <select id="currency-selector" class="form-select">
                     <option value="NPR">Nepalese Rupee (NPR)</option>
@@ -229,6 +229,29 @@
     window.onload = function() {
         fetch_rooms();
     };
+
+    function checkLoginToBook(login, room_id) {
+        // Get the selected currency from the dropdown
+        let selectedCurrency = document.getElementById('currency-selector').value;
+        if (!login) {
+            window.location.href = 'login.php';
+        } else {
+            window.location.href = 'confirm_booking.php?id=' + room_id + '&currency=' + selectedCurrency;
+        }
+    }
+
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('book-now-btn')) {
+            let login = e.target.getAttribute('data-login');
+            let room_id = e.target.getAttribute('data-room-id');
+            let selectedCurrency = document.getElementById('currency-selector').value;
+            if (!login || login == '0') {
+                window.location.href = 'login.php';
+            } else {
+                window.location.href = 'confirm_booking.php?id=' + room_id + '&currency=' + selectedCurrency;
+            }
+        }
+    });
   </script>
 
   <?php require('inc/footer.php'); ?>
