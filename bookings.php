@@ -94,7 +94,7 @@
                   <b>Check out: </b> $checkout
                 </p>
                 <p>
-                  <b>Amount: </b> NPR$data[price] <br>
+                  <b>Amount: </b> $data[trans_amt] $data[currency] <br>
                   <b>Order ID: </b> $data[order_id] <br>
                   <b>Date: </b> $date
                 </p>
