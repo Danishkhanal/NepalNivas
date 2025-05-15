@@ -92,7 +92,7 @@ if(isset($_POST['get_bookings']))
             <br>
             <b>Check-out:</b> $checkout
             <br>
-            <b>Paid:</b> NPR$data[trans_amt]
+            <b>Paid:</b> $data[trans_amt] $data[currency]
             <br>
             <b>Date:</b> $date
             </td>
