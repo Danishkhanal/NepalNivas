@@ -71,7 +71,7 @@
             <b>Price:</b> NPR$data[price]
           </td>
           <td>
-            <b>Amount:</b> NPR$data[trans_amt]
+            <b>Amount:</b> $data[trans_amt] $data[currency]
             <br>
             <b>Date:</b> $date
           </td>
