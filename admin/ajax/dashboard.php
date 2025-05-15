@@ -20,22 +20,43 @@
       $condition="WHERE datentime BETWEEN NOW() - INTERVAL 1 YEAR AND NOW()";
     }
 
-    $result = mysqli_fetch_assoc(mysqli_query($con,"SELECT 
+    // Fetch all relevant bookings with room price and days
+    $bookings = mysqli_query($con, "SELECT bo.booking_status, bo.arrival, bo.refund, bo.check_in, bo.check_out, r.price FROM booking_order bo JOIN rooms r ON bo.room_id = r.id $condition");
 
-      COUNT(CASE WHEN booking_status!='pending'AND booking_status!='payment failed' THEN 1 END) AS `total_bookings`,
-      SUM(CASE WHEN booking_status!='pending' AND booking_status!='payment failed' THEN `trans_amt` END) AS `total_amt`,
+    $total_bookings = $active_bookings = $cancelled_bookings = 0;
+    $total_amt = $active_amt = $cancelled_amt = 0;
 
-      COUNT(CASE WHEN booking_status='booked' AND arrival=1 THEN 1 END) AS `active_bookings`,
-      SUM(CASE WHEN booking_status='booked' AND arrival=1 THEN `trans_amt` END) AS `active_amt`,
+    while ($row = mysqli_fetch_assoc($bookings)) {
+        $days = (strtotime($row['check_out']) - strtotime($row['check_in'])) / (60*60*24);
+        if ($days < 1) $days = 1; // Minimum 1 day
+        $amount = $row['price'] * $days;
+        // Total bookings
+        if ($row['booking_status'] != 'pending' && $row['booking_status'] != 'payment failed') {
+            $total_bookings++;
+            $total_amt += $amount;
+        }
+        // Active bookings
+        if ($row['booking_status'] == 'booked' && $row['arrival'] == 1) {
+            $active_bookings++;
+            $active_amt += $amount;
+        }
+        // Cancelled bookings
+        if ($row['booking_status'] == 'cancelled' && $row['refund'] == 1) {
+            $cancelled_bookings++;
+            $cancelled_amt += $amount;
+        }
+    }
 
-      COUNT(CASE WHEN booking_status='cancelled' AND refund=1 THEN 1 END) AS `cancelled_bookings`,
-      SUM(CASE WHEN booking_status='cancelled' AND refund=1 THEN `trans_amt` END) AS `cancelled_amt`
+    $output = [
+        'total_bookings' => $total_bookings,
+        'total_amt' => round($total_amt, 2),
+        'active_bookings' => $active_bookings,
+        'active_amt' => round($active_amt, 2),
+        'cancelled_bookings' => $cancelled_bookings,
+        'cancelled_amt' => round($cancelled_amt, 2)
+    ];
 
-      FROM `booking_order` $condition"));
-
-    $output = json_encode($result);
-
-    echo $output;
+    echo json_encode($output);
   }
 
 
