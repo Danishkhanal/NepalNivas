@@ -233,8 +233,8 @@
     function checkLoginToBook(login, room_id) {
         // Get the selected currency from the dropdown
         let selectedCurrency = document.getElementById('currency-selector').value;
-        if (!login) {
-            window.location.href = 'login.php';
+        if (login === '0' || !login) {
+            alert('Please login to book room!');
         } else {
             window.location.href = 'confirm_booking.php?id=' + room_id + '&currency=' + selectedCurrency;
         }
@@ -245,8 +245,8 @@
             let login = e.target.getAttribute('data-login');
             let room_id = e.target.getAttribute('data-room-id');
             let selectedCurrency = document.getElementById('currency-selector').value;
-            if (!login || login == '0') {
-                window.location.href = 'login.php';
+            if (login === '0' || !login) {
+                alert('Please login to book room!');
             } else {
                 window.location.href = 'confirm_booking.php?id=' + room_id + '&currency=' + selectedCurrency;
             }
