@@ -230,21 +230,12 @@
         fetch_rooms();
     };
 
-    function checkLoginToBook(login, room_id) {
-        // Get the selected currency from the dropdown
-        let selectedCurrency = document.getElementById('currency-selector').value;
-        if (login === '0' || !login) {
-            alert('Please login to book room!');
-        } else {
-            window.location.href = 'confirm_booking.php?id=' + room_id + '&currency=' + selectedCurrency;
-        }
-    }
-
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('book-now-btn')) {
             let login = e.target.getAttribute('data-login');
             let room_id = e.target.getAttribute('data-room-id');
             let selectedCurrency = document.getElementById('currency-selector').value;
+            
             if (login === '0' || !login) {
                 alert('Please login to book room!');
             } else {

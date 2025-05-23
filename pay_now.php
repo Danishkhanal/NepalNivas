@@ -1,6 +1,7 @@
 <?php 
 require('admin/inc/db_config.php');
 require('admin/inc/essentials.php');
+require('inc/loyalty_points.php'); // Include loyalty points functions
 
 // Include Stripe's PHP library
 require_once('vendor/autoload.php'); // Ensure Stripe SDK is installed correctly
@@ -48,6 +49,16 @@ if (isset($_POST['pay_now'])) {
   $TXN_AMOUNT = $_SESSION['room']['payment'];
   $ORDER_ID = 'ORD_' . $_SESSION['uId'] . random_int(11111, 9999999);
 
+  // Handle loyalty points redemption if selected
+  if(isset($_POST['loyalty_reward']) && !empty($_POST['loyalty_reward'])) {
+    $reward_id = filteration($_POST['loyalty_reward']);
+    $result = redeemLoyaltyPoints($CUST_ID, $reward_id);
+    
+    if(!$result['success']) {
+      redirect('confirm_booking.php?id=' . $_SESSION['room']['id'] . '&currency=' . $selected_currency . '&error=loyalty_redeem_failed');
+    }
+  }
+
   // Calculate the correct payment amount for the selected currency
   if ($payment_method === 'stripe') {
     $final_amount = convertCurrency($TXN_AMOUNT, $base_currency, $selected_currency, $con);
@@ -72,6 +83,11 @@ if (isset($_POST['pay_now'])) {
 
   $query2 = "INSERT INTO `booking_details` (`booking_id`, `room_name`, `price`, `total_pay`, `user_name`, `phonenum`, `address`) VALUES (?,?,?,?,?,?,?)";
   insert($query2, [$booking_id, $_SESSION['room']['name'], $_SESSION['room']['price'], $final_amount, $paramList['name'], $paramList['phonenum'], $paramList['address']], 'issssss');
+
+  // Add loyalty points for the booking
+  // Convert amount to NPR for points calculation if needed
+  $points_amount = ($selected_currency == 'NPR') ? $final_amount : convertCurrency($final_amount, $selected_currency, 'NPR', $con);
+  addLoyaltyPoints($CUST_ID, $booking_id, $points_amount);
 
   if ($payment_method === 'stripe') {
     // Stripe Payment

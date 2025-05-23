@@ -159,7 +159,7 @@
                     <?php if($selected_currency == 'NPR'): ?>
                       <option value="eSewa">eSewa</option>
                     <?php else: ?>
-                      <option value="stripe">Stripe</option>
+                      <option value="stripe">Card</option>
                     <?php endif; ?>
                   </select>
                 </div>
@@ -184,7 +184,6 @@
 
   <?php require('inc/footer.php'); ?>
   <script>
-
     let booking_form = document.getElementById('booking_form');
     let info_loader = document.getElementById('info_loader');
     let pay_info = document.getElementById('pay_info');
@@ -239,9 +238,7 @@
 
         xhr.send(data);
       }
-
     }
-
   </script>
 
 </body>
